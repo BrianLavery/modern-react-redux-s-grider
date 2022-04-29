@@ -31,11 +31,8 @@ class App extends React.Component {
         console.log('My component was just updated')
     }
 
-    // React says we have to define render and return JSX
-    render() {
-        // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
-        // Need to pass in 2 callbacks (success + failure) as this function needs time to return value
-        
+    // Helper function - we use this as don't want conditional logic in render function
+    renderContent() {
         if (this.state.errorMessage && !this.state.lat) {
             return <div>Error: {this.state.errorMessage}</div>
         }
@@ -45,6 +42,17 @@ class App extends React.Component {
         }
         
         return <Spinner message="Please accept location request" />
+    }
+
+    // React says we have to define render and return JSX
+    render() {
+        // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+        // Need to pass in 2 callbacks (success + failure) as this function needs time to return value
+        return (
+            <div className='border red'>
+                {this.renderContent()}
+            </div>
+        )
     }
 }
 
