@@ -3,7 +3,41 @@ import axios from 'axios'
 
 const Search = () => {
     const [term, setTerm] = useState('')
+    const [debouncedTerm, setDebouncedTerm] = useState(term) // Set up to avoid double API requests
     const [results, setResults] = useState([])
+
+    // Set this up to avoid double requests
+    useEffect(() => {
+        const timerId = setTimeout(() => {
+            setDebouncedTerm(term)
+        }, 1000)
+
+        return () => {
+            clearTimeout(timerId)
+        }
+    }, [term])
+
+    useEffect(() => {
+        const search = async () => {
+            const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+                params: {
+                    action: 'query',
+                    list: 'search',
+                    origin: '*',
+                    format: 'json',
+                    srsearch: debouncedTerm
+                }
+            })
+
+            setResults(data.query.search)
+        }
+
+        if (debouncedTerm) {
+            search()
+        } else {
+            setResults([])
+        }
+    }, [debouncedTerm])
 
     // Use Effect will take 2 arguments and the first will be a function to run
     // Second is argument to tell us when to run the function - either
@@ -14,36 +48,36 @@ const Search = () => {
 
     // For useEffect you can only return one type of value - you can only return a function ("cleanup function")
     // when useEffect runs each time it calls the cleanup function from last time and then it runs
-    useEffect(() => {
-        const search = async () => {
-            const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
-                params: {
-                    action: 'query',
-                    list: 'search',
-                    origin: '*',
-                    format: 'json',
-                    srsearch: term
-                }
-            })
+    // useEffect(() => {
+    //     const search = async () => {
+    //         const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+    //             params: {
+    //                 action: 'query',
+    //                 list: 'search',
+    //                 origin: '*',
+    //                 format: 'json',
+    //                 srsearch: term
+    //             }
+    //         })
 
-            setResults(data.query.search)
-        }
+    //         setResults(data.query.search)
+    //     }
 
-        if (term || results.length) {
-            const timeoutId = setTimeout(() => {
-                if (term) {
-                    search()
-                } else {
-                    setResults([])
-                }
-            }, 500)
+    //     if (term || results.length) {
+    //         const timeoutId = setTimeout(() => {
+    //             if (term) {
+    //                 search()
+    //             } else {
+    //                 setResults([])
+    //             }
+    //         }, 500)
     
-            return () => {
-                clearTimeout(timeoutId)
-            }
-        }
+    //         return () => {
+    //             clearTimeout(timeoutId)
+    //         }
+    //     }
 
-    }, [term])
+    // }, [term, results.length])
     
     const renderedResults = results.map((result) => {
        return (
