@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-const Dropdown = ({ options, selected, onSelectedChange }) => {
+const Dropdown = ({ options, selected, onSelectedChange, label }) => {
     const [open, setOpen] = useState(false)
     const ref = useRef()
     
@@ -43,7 +43,7 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
         // If occurred inside this element then we deactive the event listener on the body
         <div ref={ref} className='ui form'>
             <div className='field'>
-                <label className='label'> Select a colour</label>
+                <label className='label'>{label}</label>
                 <div
                     onClick={() => {
                         setOpen(!open)
@@ -57,6 +57,9 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
                     </div>
                 </div>
             </div>
+            {/* <div>
+                <p style={{ color: selected.value }}>This text is {selected.value}</p>
+            </div> */}
         </div>
     )
 }
