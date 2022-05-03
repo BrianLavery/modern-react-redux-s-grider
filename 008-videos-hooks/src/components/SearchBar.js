@@ -13,7 +13,7 @@ const SearchBar = ({ onFormSubmit }) => {
         <div className="search-bar ui segment" style={{ 'marginTop': '16px' }}>
             <form className="ui form" onSubmit={onSubmit}>
                 <div className="field">
-                    <label>Video Search</label>
+                    <label>YouTube Video Search</label>
                     <input type="text" value={term} onChange={(e) => setTerm(e.target.value)}/>
                 </div>
             </form>
