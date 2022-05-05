@@ -1,11 +1,10 @@
 import { combineReducers } from "redux"
-
-const dummyReducer = () => {
-    return []
-}
+import postsReducer from "./postsReducer"
+import usersReducer from './usersReducer'
 
 const reducers = combineReducers({
-    dummyReducer
+    posts: postsReducer,
+    users: usersReducer
 })
 
-export { reducers, dummyReducer }
+export { reducers }
