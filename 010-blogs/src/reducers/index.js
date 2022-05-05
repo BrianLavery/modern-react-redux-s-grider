@@ -1,5 +1,11 @@
+import { combineReducers } from "redux"
+
 const dummyReducer = () => {
     return []
 }
 
-export { dummyReducer }
+const reducers = combineReducers({
+    dummyReducer
+})
+
+export { reducers, dummyReducer }
