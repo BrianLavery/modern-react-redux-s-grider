@@ -4,13 +4,25 @@ import jsonplaceholder from "../apis/jsonplaceholder"
 // Every time we call one of our action creators from this function we need to dispatch it too
 const fetchPostsAndUsers = () => async (dispatch, getState) => {
     await dispatch(fetchPosts()) // We fetch list of posts here
-    
-    // We use lodash version of map and we will get the list of all userIds
-    const listOfUserIds =_.map(getState().posts, 'userId')
-    const uniqueUserIds = _.uniq(listOfUserIds)
-    
-    uniqueUserIds.forEach(id => dispatch(fetchUser(id)))
+
+    // For Lodash chain the result of each method is passed as first argument into next method
+    _.chain(getState().posts)
+        .map('userId')
+        .uniq()
+        .forEach(id => dispatch(fetchUser(id)))
+        .value() // This is like command to execute
 }
+
+// PRE REFACTOR
+// const fetchPostsAndUsers = () => async (dispatch, getState) => {
+//     await dispatch(fetchPosts()) // We fetch list of posts here
+    
+//     // We use lodash version of map and we will get the list of all userIds
+//     const listOfUserIds =_.map(getState().posts, 'userId')
+//     const uniqueUserIds = _.uniq(listOfUserIds)
+    
+//     uniqueUserIds.forEach(id => dispatch(fetchUser(id)))
+// }
 
 const fetchPosts = () => async (dispatch) => {
     const response = await jsonplaceholder.get('/posts')
