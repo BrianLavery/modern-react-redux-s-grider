@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import authReducer from './authReducer'
 
 const reducers = combineReducers({
-    replaceMe: () => 10
+    auth: authReducer
 })
 
 export { reducers, authReducer }
