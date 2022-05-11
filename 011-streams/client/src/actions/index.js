@@ -14,10 +14,15 @@ const signOut = () => {
     }
 }
 
-const createStream = formValues => async dispatch => {
-    const response = await streams.post('/streams', formValues)
+// We get the getState argument in all action creators and use it to get other state
+const createStream = formValues => async (dispatch, getState) => {
+    const { userId } = getState().auth
+    const response = await streams.post('/streams', { ...formValues, userId })
 
     dispatch({ type: CREATE_STREAM, payload: response.data })
+    // Programmatic navigation to redirect user after we create the stream
+    // It is hard to get access to BrowserRouter history outside of a React Component
+
 }
 
 const fetchStreams = () => async dispatch => {

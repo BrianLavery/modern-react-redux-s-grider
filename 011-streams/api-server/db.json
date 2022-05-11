@@ -9,6 +9,18 @@
       "title": "Other Stream",
       "description": "Here's a stream",
       "id": 2
+    },
+    {
+      "title": "Stream with user",
+      "description": "This will be the first stream with a user",
+      "userId": "100622108747968773069",
+      "id": 3
+    },
+    {
+      "title": "Unexpected behaviour",
+      "description": "Didn't expect that",
+      "userId": "100622108747968773069",
+      "id": 4
     }
   ]
 }
