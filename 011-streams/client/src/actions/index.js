@@ -1,5 +1,6 @@
 import { SIGN_IN, SIGN_OUT, CREATE_STREAM, FETCH_STREAM, FETCH_STREAMS, EDIT_STREAM, DELETE_STREAM } from './types'
 import streams from '../apis/streams'
+import history from '../history'
 
 const signIn = (userId) => {
     return {
@@ -22,7 +23,8 @@ const createStream = formValues => async (dispatch, getState) => {
     dispatch({ type: CREATE_STREAM, payload: response.data })
     // Programmatic navigation to redirect user after we create the stream
     // It is hard to get access to BrowserRouter history outside of a React Component
-
+    // We did this by creating a custom history object and then using React Router
+    history.push('/')
 }
 
 const fetchStreams = () => async dispatch => {

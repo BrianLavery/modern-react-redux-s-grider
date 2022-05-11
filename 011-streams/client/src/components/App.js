@@ -2,18 +2,20 @@ import React from 'react'
 // Deployment with BrowserRouter can be challenging using some services
 // Browser Router struggles with unknown path as there is no backend html server (wont' do 404 - will give back html)
 // Hash Router use as server won't look at anything after '#' so only client looks at this
-import { BrowserRouter, HashRouter, MemoryRouter, Route, Link } from 'react-router-dom'
+// We use Router if we want to have our own history object
+import { Router, BrowserRouter, HashRouter, MemoryRouter, Route, Link } from 'react-router-dom'
 import StreamCreate from './streams/StreamCreate'
 import StreamDelete from './streams/StreamDelete'
 import StreamEdit from './streams/StreamEdit'
 import StreamList from './streams/StreamList'
 import StreamShow from './streams/StreamShow'
 import Header from './Header'
+import history from '../history'
 
 const App = () => {
     return (
         <div>
-            <BrowserRouter>
+            <Router history={history}>
                 <div> 
                     <Header />
                     <div className='ui container'>
@@ -24,7 +26,7 @@ const App = () => {
                         <Route path='/streams/show' exact component={StreamShow} />
                     </div>
                 </div>
-            </BrowserRouter>
+            </Router>
         </div>
     )
 }
