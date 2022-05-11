@@ -4,6 +4,11 @@
       "title": "Now",
       "description": "Yes?",
       "id": 1
+    },
+    {
+      "title": "Other Stream",
+      "description": "Here's a stream",
+      "id": 2
     }
   ]
 }
