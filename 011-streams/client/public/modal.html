@@ -1,0 +1,57 @@
+<!-- This is an illustrative example as to why it's hard to create modals in React -->
+<head>
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 200px;
+            background-color: green;
+        }
+
+        .content {
+            margin-left: 200px;
+        }
+
+        .modal-body {
+            background-color: white;
+            margin: auto;
+            height: 15%;
+            width: 35%;
+            z-index: 2;
+        }
+
+        .modal {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            background-color: grey;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+
+        /* This element creates a stacking context for z-index comparisons
+        Elements with same index its order in html that determines stacking - later html goes on top */
+        .positioned {
+            position: relative; 
+            z-index: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="modal">
+        <div class="modal-body">
+            <h1>I am a modal</h1>
+        </div>
+    </div>
+    <div class="positioned">
+        asdfa
+        asdfaasdfasd
+        asdfas
+    </div>
+    <div class="sidebar">I am a sidebar</div>
+    <div class="content"><h1>I am some content</h1></div>
+</body>
