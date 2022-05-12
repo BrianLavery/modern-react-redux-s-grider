@@ -4,7 +4,7 @@ import React from 'react'
 // Hash Router use as server won't look at anything after '#' so only client looks at this
 // We use Router if we want to have our own history object
 // With React-Router each component needs to be designed to work in isolation (fetch own data!)
-import { Router, BrowserRouter, HashRouter, MemoryRouter, Route, Link } from 'react-router-dom'
+import { Router, BrowserRouter, HashRouter, MemoryRouter, Route, Link, Switch } from 'react-router-dom'
 import StreamCreate from './streams/StreamCreate'
 import StreamDelete from './streams/StreamDelete'
 import StreamEdit from './streams/StreamEdit'
@@ -20,11 +20,13 @@ const App = () => {
                 <div> 
                     <Header />
                     <div className='ui container'>
-                        <Route path='/' exact component={StreamList} />
-                        <Route path='/streams/new' exact component={StreamCreate} />
-                        <Route path='/streams/edit/:id' exact component={StreamEdit} />
-                        <Route path='/streams/delete/:id' exact component={StreamDelete} />
-                        <Route path='/streams/show' exact component={StreamShow} />
+                        <Switch> {/*Switch will show only one route from those inside*/}
+                            <Route path='/' exact component={StreamList} />
+                            <Route path='/streams/new' exact component={StreamCreate} />
+                            <Route path='/streams/edit/:id' exact component={StreamEdit} />
+                            <Route path='/streams/delete/:id' exact component={StreamDelete} />
+                            <Route path='/streams/:id' exact component={StreamShow} />
+                        </Switch>
                     </div>
                 </div>
             </Router>
