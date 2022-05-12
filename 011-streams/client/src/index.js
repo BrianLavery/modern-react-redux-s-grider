@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
 import reduxThunk from 'redux-thunk'
+const NodeMediaServer = require('node-media-server');
 
 import App from './components/App'
 import { reducers, authReducer } from './reducers'
