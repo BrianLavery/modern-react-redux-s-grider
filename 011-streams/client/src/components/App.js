@@ -3,6 +3,7 @@ import React from 'react'
 // Browser Router struggles with unknown path as there is no backend html server (wont' do 404 - will give back html)
 // Hash Router use as server won't look at anything after '#' so only client looks at this
 // We use Router if we want to have our own history object
+// With React-Router each component needs to be designed to work in isolation (fetch own data!)
 import { Router, BrowserRouter, HashRouter, MemoryRouter, Route, Link } from 'react-router-dom'
 import StreamCreate from './streams/StreamCreate'
 import StreamDelete from './streams/StreamDelete'
@@ -21,8 +22,8 @@ const App = () => {
                     <div className='ui container'>
                         <Route path='/' exact component={StreamList} />
                         <Route path='/streams/new' exact component={StreamCreate} />
-                        <Route path='/streams/edit' exact component={StreamEdit} />
-                        <Route path='/streams/delete' exact component={StreamDelete} />
+                        <Route path='/streams/edit/:id' exact component={StreamEdit} />
+                        <Route path='/streams/delete/:id' exact component={StreamDelete} />
                         <Route path='/streams/show' exact component={StreamShow} />
                     </div>
                 </div>
